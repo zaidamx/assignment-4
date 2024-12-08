@@ -1,4 +1,2 @@
-# gitShipMain
-Assignment 4
-
+# Assignment 4
 Hi
