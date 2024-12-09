@@ -1,12 +1,14 @@
 class Player {
   PVector pos;
-  PVector vel;
+  PVector vel; // more accurately movement vector
+  float speed;
   
   // constructor
-  Player() {
+  Player(float newSpeed) {
     // always set the player at the center of the screen
-    pos = new PVector(300,300);
+    pos = new PVector(225,225);
     vel = new PVector(0,0);
+    speed = newSpeed;
   }
   
   // always draw player with the origin at the center
@@ -17,6 +19,6 @@ class Player {
   
   // update position based on velocity
   void update() {
-    pos = new PVector(pos.x + vel.x, pos.y + vel.y);
+    pos = new PVector(pos.x + (vel.x * speed), pos.y + (vel.y * speed));
   }
 }
