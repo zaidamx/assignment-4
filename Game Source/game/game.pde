@@ -2,7 +2,7 @@
 GameManager manager;
 
 // flags
-int CURRENT_ROOM = 1;
+int CURRENT_ROOM = 0;
 boolean RESTARTING = false;
 
 // initial setup
@@ -48,7 +48,6 @@ void keyReleased(){
 
 // game stuff
 void draw() {
-  
   // game manager will update everything for us
   if (RESTARTING == false) {
     background(manager.roomNum*10);
