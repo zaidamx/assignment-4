@@ -1,10 +1,13 @@
 class Door {
   PVector pos;
   PVector size;
+  boolean trueDoor;
   
-  Door(PVector newPos, PVector newSize) {
+  Door(PVector newPos, PVector newSize, boolean isTrueDoor) {
     pos = newPos;
     size = newSize;
+    
+    trueDoor = isTrueDoor;
   }
   
   boolean checkCollision(Player player) {
@@ -23,8 +26,13 @@ class Door {
   }
   
   void draw(){
-    rectMode(CENTER);
-    fill(153, 51, 0);
+    rectMode(CENTER); // always draw door at the center
+    
+    if (!trueDoor){
+      fill(153, 51, 0);
+    } else {
+      fill(255, 0, 0);
+    }
     rect(pos.x, pos.y, size.x, size.y);
   }
 }

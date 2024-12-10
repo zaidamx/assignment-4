@@ -1,19 +1,24 @@
 // variables
 Player player;
 InputManager input;
-Door door;
 String gameState = "idle";
+
+// test
+Room testRoom;
 
 // initial setup
 void setup(){
   size(450,450);
   
-  player = new Player(2);// argument is speed, which movement vector is multiplied by
+  player = new Player(5);// argument is speed, which movement vector is multiplied by
   input = new InputManager(player);
   input.reset();
   
-  // test
-  door = new Door(new PVector(100,100), new PVector(10, 200));
+  // test room
+  testRoom = new Room(3,3,3,3, player);
+  testRoom.setup();
+  
+  gameState = "running";
 }
 
 // input stuff
@@ -37,11 +42,13 @@ void draw() {
   // call input manager to update player's velocity
   input.update();
   
-  boolean colliding = door.checkCollision(player);
-  print("\nColliding with door:", colliding);
+  // draw all doors
+  testRoom.draw();
   
-  // test door
-  door.draw();
+  // check on state
+  if (testRoom.state == "TouchedFalseDoor") {
+    player.IsDead = true;
+  }
   
  // print("\n Player vel: ", player.vel);
 }

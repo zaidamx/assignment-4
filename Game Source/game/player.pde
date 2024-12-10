@@ -4,6 +4,9 @@ class Player {
   PVector vel; // more accurately movement vector
   float speed;
   
+  // flags
+  boolean IsDead = false;
+  
   // constructor
   Player(float newSpeed) {
     // always set the player at the center of the screen
@@ -23,6 +26,8 @@ class Player {
   
   // update position based on velocity
   void update() {
-    pos = new PVector(pos.x + (vel.x * speed), pos.y + (vel.y * speed));
+    if (!IsDead) {
+      pos = new PVector(pos.x + (vel.x * speed), pos.y + (vel.y * speed));
+    }
   }
 }
