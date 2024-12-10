@@ -73,6 +73,7 @@ class Room {
     
     // set true door to a true door
     int trueDoor = int(random(1, doors.size() + 1));
+    print("\n Room door count:", doors.size());
     doors.get(trueDoor - 1).trueDoor = true;
   }
   
@@ -92,5 +93,15 @@ class Room {
         }
       }
     }
+  }
+  
+  void clear() {
+    // clear doors
+    for (int door = 0; door < doors.size(); door++) {
+      doors.remove(door);
+    }
+    
+    // clear door array itself
+    doors = null;
   }
 }

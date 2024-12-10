@@ -1,54 +1,47 @@
 // variables
-Player player;
-InputManager input;
-String gameState = "idle";
+GameManager manager;
+//String gameState = "idle";
 
-// test
-Room testRoom;
+// flags
+int CURRENT_ROOM = 1;
 
 // initial setup
 void setup(){
   size(450,450);
   
-  player = new Player(5);// argument is speed, which movement vector is multiplied by
-  input = new InputManager(player);
-  input.reset();
+  // set-up manager
+  manager = new GameManager();
+  manager.setupRoom(CURRENT_ROOM);
   
-  // test room
-  testRoom = new Room(3,3,3,3, player);
-  testRoom.setup();
-  
-  gameState = "running";
+  // set-up input
+  manager.input.reset();
 }
 
 // input stuff
 void keyPressed(){
   // update input manager
-  input.KeyPressed(key);
+  if (manager != null) {
+    manager.input.KeyPressed(key);
+  }
 }
 
 void keyReleased(){
-  input.KeyReleased(key);
+  // update input manager
+  if (manager != null) {
+    manager.input.KeyReleased(key);
+  }
 }
 
 // game stuff
 void draw() {
   background(0,0,0);
   
+  // game manager will update everything for us
+  manager.update();
   // update the player and draw it every frame
-  player.update();
-  player.draw();
+  //player.update();
+  //player.draw();
   
   // call input manager to update player's velocity
-  input.update();
-  
-  // draw all doors
-  testRoom.draw();
-  
-  // check on state
-  if (testRoom.state == "TouchedFalseDoor") {
-    player.IsDead = true;
-  }
-  
- // print("\n Player vel: ", player.vel);
+  //input.update();
 }

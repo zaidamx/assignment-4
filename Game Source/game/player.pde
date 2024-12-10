@@ -5,7 +5,8 @@ class Player {
   float speed;
   
   // flags
-  boolean IsDead = false;
+  boolean stop = false;
+  boolean isDead = false;
   
   // constructor
   Player(float newSpeed) {
@@ -20,13 +21,19 @@ class Player {
   // always draw player with the origin at the center
   void draw() {
     rectMode(CENTER);
-    fill(255,255,255);
+    if (isDead == true) {
+      fill(255,0,0);
+    } else {
+      fill(255,255,255);
+    }
+    
     square(pos.x, pos.y, 20);
+    
   }
   
   // update position based on velocity
   void update() {
-    if (!IsDead) {
+    if (stop == false) {
       pos = new PVector(pos.x + (vel.x * speed), pos.y + (vel.y * speed));
     }
   }

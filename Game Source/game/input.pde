@@ -50,7 +50,6 @@ class InputManager {
   */
 
   void KeyPressed(char Key) {
-    
     // this is a little bad, but i don't know how else to do this
     if (Key == 'w') {
       keysPressed[0] = true;
@@ -64,8 +63,7 @@ class InputManager {
   }
   
   void KeyReleased(char Key) {
-    
-        // this is a little bad, but i don't know how else to do this
+    // this is a little bad, but i don't know how else to do this
     if (Key == 'w') {
       keysPressed[0] = false;
     } else if (Key == 'a') {
