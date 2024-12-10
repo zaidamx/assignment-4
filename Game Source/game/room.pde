@@ -73,7 +73,6 @@ class Room {
     
     // set true door to a true door
     int trueDoor = int(random(1, doors.size() + 1));
-    print("\n Room door count:", doors.size());
     doors.get(trueDoor - 1).trueDoor = true;
   }
   

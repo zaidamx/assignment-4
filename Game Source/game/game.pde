@@ -4,6 +4,7 @@ GameManager manager;
 
 // flags
 int CURRENT_ROOM = 1;
+boolean RESTARTING = false;
 
 // initial setup
 void setup(){
@@ -23,6 +24,20 @@ void keyPressed(){
   if (manager != null) {
     manager.input.KeyPressed(key);
   }
+  
+  // restart functionality when win or lose
+  if (key == 'r' && (manager.gameState == "lost" || manager.gameState == "won") && RESTARTING == false) {
+    RESTARTING = true;
+    
+    manager = new GameManager();
+    manager.setupRoom(CURRENT_ROOM);
+  
+    // set-up input
+    manager.input.reset();
+    
+    // set everything back to normal
+    RESTARTING = false;
+  }
 }
 
 void keyReleased(){
@@ -37,7 +52,9 @@ void draw() {
   background(0,0,0);
   
   // game manager will update everything for us
-  manager.update();
+  if (RESTARTING == false) {
+    manager.update();
+  }
   // update the player and draw it every frame
   //player.update();
   //player.draw();
