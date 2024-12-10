@@ -15,7 +15,7 @@ void setup(){
   input.reset();
   
   // test room
-  testRoom = new Room(3,3,3,3);
+  testRoom = new Room(3,3,3,3, player);
   testRoom.setup();
   
   gameState = "running";
@@ -44,6 +44,11 @@ void draw() {
   
   // draw all doors
   testRoom.draw();
+  
+  // check on state
+  if (testRoom.state == "TouchedFalseDoor") {
+    player.IsDead = true;
+  }
   
  // print("\n Player vel: ", player.vel);
 }

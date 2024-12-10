@@ -8,14 +8,18 @@ class Room {
   int doorsRight; // size: big y, pos: big x
   int doorsDown; // size: bix x, pos: big y
   
-  // game flags
-  boolean touchedTrueDoor = false;
+  Player player;
   
-  Room(int numDoorsUp, int numDoorsLeft, int numDoorsRight, int numDoorsDown) {
+  // game flags
+  String state = "idle";
+  
+  Room(int numDoorsUp, int numDoorsLeft, int numDoorsRight, int numDoorsDown, Player nPlayer) {
     doorsUp = numDoorsUp;
     doorsLeft = numDoorsLeft;
     doorsRight = numDoorsRight;
     doorsDown = numDoorsDown;
+    
+    player = nPlayer;
   }
   
   void createDoors(String side, int doorLimit) {
@@ -74,9 +78,19 @@ class Room {
   
   void draw() {
     for (int door = 0; door < doors.size(); door++) {
-      doors.get(door).draw();
+      Door currentDoor = doors.get(door); // store current door into a variable
+      currentDoor.draw();
       
-      // check for player collision
+      // check for player collision during the "idle" room state
+      if (state == "idle") {
+        boolean colliding = currentDoor.checkCollision(player);
+        
+        if (colliding == true && currentDoor.trueDoor == true) { // colliding and is true door
+          state = "TouchedTrueDoor";
+        } else if (colliding == true && currentDoor.trueDoor == false) {
+          state = "TouchedFalseDoor";
+        }
+      }
     }
   }
 }
