@@ -1,6 +1,5 @@
 // variables
 GameManager manager;
-//String gameState = "idle";
 
 // flags
 int CURRENT_ROOM = 1;
@@ -49,16 +48,12 @@ void keyReleased(){
 
 // game stuff
 void draw() {
-  background(0,0,0);
   
   // game manager will update everything for us
   if (RESTARTING == false) {
+    background(manager.roomNum*10);
     manager.update();
+  } else{
+    background(0);
   }
-  // update the player and draw it every frame
-  //player.update();
-  //player.draw();
-  
-  // call input manager to update player's velocity
-  //input.update();
 }

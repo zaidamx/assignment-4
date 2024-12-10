@@ -7,13 +7,13 @@ class GameManager {
   
   // FLAGS
   String gameState = "idling";
-  int WIN_ROOM = 30;
+  int WIN_ROOM = 20;
   
   // constructor
   GameManager() {
     player = new Player(5);
     input = new InputManager(player);
-    roomNum = 0;
+    roomNum = 1;
   }
   
   void setupRoom(int room) {
@@ -37,10 +37,10 @@ class GameManager {
       int currentDoorCount = 0;
       int doorsRemaining = totalDoors;
     
-      // decide the amount of doors for each side
+      // decide the amount of doors for each sides
       int[] doors = new int[4]; // 0 = up, 1 = down, 2 = Right, 3 = Left
   
-      while (currentDoorCount < totalDoors){
+      while (currentDoorCount < totalDoors) {
         
         // add 1 to all rooms if the difference between current door count and total doors is divisible by 4
         if ((doorsRemaining - currentDoorCount) >= 0) {
@@ -126,7 +126,7 @@ class GameManager {
       textAlign(CENTER, CENTER);
       textSize(25);
       fill(255,255,0);
-      String winMessage = "You won and reached Room 30! Press R to Restart.";
+      String winMessage = "You won and reached Room 20! Press R to Restart.";
       text(winMessage, 225, 225, 350, 350);
     }
   }

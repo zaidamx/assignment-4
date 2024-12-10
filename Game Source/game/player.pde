@@ -35,6 +35,14 @@ class Player {
   void update() {
     if (stop == false) {
       pos = new PVector(pos.x + (vel.x * speed), pos.y + (vel.y * speed));
+      
+      // revert position if we're moving past the screen's bounding box
+      if (pos.x - size.x / 2 < 0 || pos.x + size.x / 2 > 450) { // going past the left and ride side of the screen
+        pos = new PVector(pos.x - (vel.x * speed), pos.y);;
+      }
+      if (pos.y + size.y / 2 > 450 || pos.y - size.y / 2 < 0) { // going past the bottom and top side of the screen
+        pos = new PVector(pos.x, pos.y - (vel.y * speed));
+      }
     }
   }
 }

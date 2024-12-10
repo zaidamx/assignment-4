@@ -23,6 +23,7 @@ class Room {
   }
   
   void createDoors(String side, int doorLimit) {
+    
     // create occupancy on this side
     boolean[] occupancy = new boolean[3];
     
@@ -31,24 +32,27 @@ class Room {
       boolean foundVacancy = false;
       int occupant = 1;
       
-      // this can get very inefficient, but i don't have a better way of doing this
+      // loop through occupants and found a slot that is vacant
       while (foundVacancy == false) {
-        occupant = int(random(1,4));
+        occupant = int(random(1,4)); 
+        
         if (occupancy[occupant - 1] != true) {
           occupancy[occupant - 1] = true;
           foundVacancy = true;
         }
       }
       
-      // determine position based on occupancy
+      // determine position on the side based on occupancy
       int newDoorLoc = (450 / 3) * occupant - 75; // choose between 3 pre-determined positions on each side
       
-      // determine position
+      // define position and size
       PVector doorPos = new PVector(0,0); // empty variable
       PVector doorSize = new PVector(0,0); // empty variable, width = 100, height = 10
+      
+      // determine position and size based on side given
       if (side == "UP") {
         doorPos = new PVector(newDoorLoc, 15);
-        doorSize = new PVector(100, 10);
+        doorSize = new PVector(100,10);
       } else if (side == "LEFT") {
         doorPos = new PVector(15, newDoorLoc);
         doorSize = new PVector(10, 100);
@@ -60,6 +64,7 @@ class Room {
         doorSize = new PVector(100, 10);
       }
       
+      // add to array list
       doors.add(new Door(doorPos, doorSize, false));
     }
   }
@@ -77,6 +82,7 @@ class Room {
   }
   
   void draw() {
+    // loop through each door in this room
     for (int door = 0; door < doors.size(); door++) {
       Door currentDoor = doors.get(door); // store current door into a variable
       currentDoor.draw();
